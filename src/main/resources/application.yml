@@ -1,0 +1,7 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+# 管理界面 http://localhost:15672
+server:
+  port: 80
