@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 @Service
 @Slf4j
@@ -18,6 +20,11 @@ public class SendMailServiceImpl implements SendMailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+
+    // 日期信息
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss EEE a");
+    String dateMsg = sdf.format(date);
 
     //发送人
     private String from = "george@163.com";
@@ -34,12 +41,14 @@ public class SendMailServiceImpl implements SendMailService {
     private String subject = "您涉及违反国家安全法";
     //正文
 
-    private String simple_context = "请立即到公安局投案自首，否则将被列为红色嫌疑人并进行全网通缉！";
+    private String simple_context = "请立即到公安局投案自首，否则将被列为红色嫌疑人并进行全网通缉！" + "\n" + dateMsg;
 
     // html正文
     private String complex_context = "<img src='https://p1.ssl.qhimg.com/t0146b8a998702d6450.png'/>"
             + simple_context +
             "<a href='https://www.bilibili.com/video/BV1GJ411x7h7'>错误收到邮件？点击申诉</a>";
+
+
 
     @Override
     public void sendSimpleMail() {
